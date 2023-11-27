@@ -1,45 +1,40 @@
 <template>
   <div class="box" >
-    <span>我是A组件(接收方)
-      <br>
-      {{ msg }}
-    </span>
+    我是A组件
   </div>
 </template>
 <script>
-import Bus from "../utils/EventBus"
 
 export default {
   name: 'BaseA',
-  data () {
+  provide() {
     return {
-      msg: ""
+      num: this.num,
+      list: this.list
     }
   },
-  created() {
-
-    Bus.$on("sendMsg", (msg) => {
-      this.msg = msg
-    })
+  data () {
+    return {
+      num: 20,
+      list: {
+        name: "annie",
+        age: 17
+      }
+    }
   }
 }
 </script>
 <style lang="less" scoped>
 .box {  
-  border-width: 1.5px;
+  width: 100px;
+  height: 100px;
+  margin: 20px 50%;
+  
+  border: 1px solid orangered;
   border-radius: 8px;
-  border-color: orangered;
 
-  span {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    height: 200px;
-
-
-
-    align-items: center;
-  }
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
