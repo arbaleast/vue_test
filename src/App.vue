@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <BaseA></BaseA>
+    <BaseA :cityId="SelectId" @passId="SelectId = $event"></BaseA>
     <BaseB></BaseB>
   </div>
 </template>
@@ -15,7 +15,12 @@ export default {
   components: {
     BaseA,
     BaseB
-}
+  },
+  data() {
+    return {
+      SelectId: '101'
+    }
+  }
 }
 </script>
 

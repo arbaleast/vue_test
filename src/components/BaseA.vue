@@ -1,17 +1,20 @@
 <template>
-  <div class="box" >
-    我是A组件
+  <div class="box" @change="handler">
+    <select :value="cityId">
+      <option value="100">上海</option>
+      <option value="101">北京</option>
+      <option value="102">杭州</option>
+      <option value="103">深圳</option>
+      <option value="104">广州</option>
+    </select>
   </div>
 </template>
 <script>
-
+ 
 export default {
   name: 'BaseA',
-  provide() {
-    return {
-      num: this.num,
-      list: this.list
-    }
+  props: {
+    cityId: String
   },
   data () {
     return {
@@ -20,6 +23,11 @@ export default {
         name: "annie",
         age: 17
       }
+    }
+  },
+  methods: {
+    handler(e) {
+      this.$emit("passId", e.target.value)
     }
   }
 }
