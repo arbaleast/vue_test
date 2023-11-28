@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <BaseA 
-      :cityId="SelectId" 
-      @passId="SelectId = $event"
-      v-model="SelectId"
-    ></BaseA>
-    <BaseB></BaseB>
+    <button @click="exit">退出按钮</button>
+    <BaseA :isShow="isShow" @update:isShow="isShow = $event"></BaseA>
   </div>
 </template>
 
 <script>
 import BaseA from './components/BaseA.vue';
-import BaseB from './components/BaseB.vue';
 
 
 export default {
   name: 'App',
   components: {
     BaseA,
-    BaseB
   },
   data() {
     return {
-      SelectId: '101'
+      isShow: true
+    }
+  },
+  methods: {
+    exit() {
+      this.isShow = false
     }
   }
 }

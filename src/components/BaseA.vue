@@ -1,12 +1,18 @@
 <template>
-  <div class="box" >
-    <select :value="value" @change="handler">
-      <option value="100">上海</option>
-      <option value="101">北京</option>
-      <option value="102">杭州</option>
-      <option value="103">深圳</option>
-      <option value="104">广州</option>
-    </select>
+  <div class="box" v-show="isShow">
+    <div class="header">
+      <span>温馨提示</span>
+      <button class="exit" @click="exit">X</button>
+    </div>
+
+    <div class="content">
+      <p>你敢走___*( ￣皿￣)/#____</p>
+    </div>
+
+    <div class="footer">
+      <button @click="exit">我不敢</button>
+      <button @click="exit">咋的，不行啊</button>
+    </div>
   </div>
 </template>
 <script>
@@ -14,35 +20,59 @@
 export default {
   name: 'BaseA',
   props: {
-    value: String
+    isShow: Boolean
   },
   data () {
     return {
-      num: 20,
-      list: {
-        name: "annie",
-        age: 17
-      }
     }
   },
   methods: {
     handler(e) {
       this.$emit("input", e.target.value)
+    },
+    exit() {
+      console.log("triggled!!!");
+      this.$emit("update:isShow", false)
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .box {  
-  width: 100px;
-  height: 100px;
-  margin: 20px 50%;
-  
+  width: 80%;
+  height: 200px;
+  margin: 20px auto;
+  padding: 0 10px;
+
   border: 1px solid orangered;
   border-radius: 8px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .header {
+    display: flex;
+    text-align: center  ;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 0;
+    
+
+    border: 3px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .content {
+    text-align: left;
+    padding-left: 20px;
+  }
+  .footer {
+    margin: 20px 8px;
+
+    display: flex;
+    justify-content: space-between;
+  }
 }
 </style>
