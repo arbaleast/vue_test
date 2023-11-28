@@ -10,8 +10,8 @@
     </div>
 
     <div class="footer">
-      <button @click="exit">我不敢</button>
-      <button @click="exit">咋的，不行啊</button>
+      <button @click="exit(false)"  >我不敢</button>
+      <button @click="exit(true)"  >咋的，不行啊</button>
     </div>
   </div>
 </template>
@@ -30,9 +30,20 @@ export default {
     handler(e) {
       this.$emit("input", e.target.value)
     },
-    exit() {
-      console.log("triggled!!!");
+    exit(value) {
+      if (value) {
+        alert("算你狠")
+        this.$emit("update:isShow", false)
+        
+        return 
+      } else {
+        alert("不错不错，（￣︶￣）↗ ")
+        this.$emit("update:isShow", false)
+        return
+      }
+
       this.$emit("update:isShow", false)
+
     }
   }
 }

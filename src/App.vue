@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <button @click="exit">退出按钮</button>
-    <BaseA :isShow="isShow" @update:isShow="isShow = $event"></BaseA>
+    <BaseA :isShow.sync="isShow"></BaseA>
   </div>
 </template>
 
