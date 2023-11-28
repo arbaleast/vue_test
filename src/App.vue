@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <BaseA :cityId="SelectId" @passId="SelectId = $event"></BaseA>
+    <BaseA 
+      :cityId="SelectId" 
+      @passId="SelectId = $event"
+      v-model="SelectId"
+    ></BaseA>
     <BaseB></BaseB>
   </div>
 </template>

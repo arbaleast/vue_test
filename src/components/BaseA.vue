@@ -1,6 +1,6 @@
 <template>
-  <div class="box" @change="handler">
-    <select :value="cityId">
+  <div class="box" >
+    <select :value="value" @change="handler">
       <option value="100">上海</option>
       <option value="101">北京</option>
       <option value="102">杭州</option>
@@ -14,7 +14,7 @@
 export default {
   name: 'BaseA',
   props: {
-    cityId: String
+    value: String
   },
   data () {
     return {
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     handler(e) {
-      this.$emit("passId", e.target.value)
+      this.$emit("input", e.target.value)
     }
   }
 }
