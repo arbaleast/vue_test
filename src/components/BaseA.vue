@@ -1,5 +1,5 @@
 <template>
-  <div class="box" v-show="isShow">
+  <div class="box" v-show="isShow" v-loading="image">
     <div class="header">
       <span>温馨提示</span>
       <button class="exit" @click="exit">X</button>
@@ -13,17 +13,30 @@
       <button @click="exit(false)"  >我不敢</button>
       <button @click="exit(true)"  >咋的，不行啊</button>
     </div>
+    <img :src="image" alt="" width="100%" height="100%">
   </div>
 </template>
 <script>
- 
+
 export default {
   name: 'BaseA',
   props: {
-    isShow: Boolean
+    isShow: Boolean,
+  },
+  directives: {
+    loading: {
+      inserted(el, binding) {
+        binding.value > 1 ? el.classList.remove("loading") : el.classList.add("loading")
+      },
+      update(el,binding) {
+        binding.value.length > 1 ? el.classList.remove("loading") : el.classList.add("loading")
+        console.log(binding, binding.value.length);
+      }
+    }
   },
   data () {
     return {
+      image: ""
     }
   },
   methods: {
@@ -45,45 +58,23 @@ export default {
       this.$emit("update:isShow", false)
 
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.image = "https://w.wallhaven.cc/full/2y/wallhaven-2y6wwg.jpg"
+    }, 3000)
   }
 }
 </script>
 <style lang="less" scoped>
-.box {  
-  width: 80%;
-  height: 200px;
-  margin: 20px auto;
-  padding: 0 10px;
+.loading:before {
+  width: 100%;
+  height: 100%;
+  background: url("https://gifdb.com/images/high/morning-coffee-loading-process-dg9uaxmp8giczrz2.webp") no-repeat center;
+  content: "";
 
-  border: 1px solid orangered;
-  border-radius: 8px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-
-  .header {
-    display: flex;
-    text-align: center  ;
-    justify-content: space-between;
-    width: 100%;
-    padding: 8px 0;
-    
-
-    border: 3px solid black;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-  }
-  .content {
-    text-align: left;
-    padding-left: 20px;
-  }
-  .footer {
-    margin: 20px 8px;
-
-    display: flex;
-    justify-content: space-between;
-  }
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 </style>
